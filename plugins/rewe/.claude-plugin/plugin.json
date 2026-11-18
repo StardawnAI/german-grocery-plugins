@@ -1,0 +1,21 @@
+{
+  "name": "rewe-shopping",
+  "version": "0.1.0",
+  "description": "Shop at REWE (Germany) for pickup: offers, basket by plain words, earliest pickup slot, recipes to basket, order only after you confirm. Unofficial; runs locally with your own REWE login.",
+  "author": {
+    "name": "Stardawn AI",
+    "email": "onedone-support@stardawnai.com",
+    "url": "https://stardawnai.com"
+  },
+  "homepage": "https://github.com/StardawnAI/german-grocery-plugins/tree/main/plugins/rewe",
+  "repository": "https://github.com/StardawnAI/german-grocery-plugins",
+  "license": "Apache-2.0",
+  "keywords": [
+    "rewe",
+    "groceries",
+    "einkaufen",
+    "abholservice",
+    "germany",
+    "shopping"
+  ]
+}

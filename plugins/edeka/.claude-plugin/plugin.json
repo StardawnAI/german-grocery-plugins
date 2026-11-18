@@ -1,0 +1,23 @@
+{
+  "name": "edeka-shopping",
+  "version": "0.1.0",
+  "description": "Shop at EDEKA online markets in Germany (EDEKA, E center, some Marktkauf): market search, offers, basket by plain words, earliest pickup slot, order only after you confirm. Unofficial; runs locally with your own login.",
+  "author": {
+    "name": "Stardawn AI",
+    "email": "onedone-support@stardawnai.com",
+    "url": "https://stardawnai.com"
+  },
+  "homepage": "https://github.com/StardawnAI/german-grocery-plugins/tree/main/plugins/edeka",
+  "repository": "https://github.com/StardawnAI/german-grocery-plugins",
+  "license": "Apache-2.0",
+  "keywords": [
+    "edeka",
+    "e center",
+    "marktkauf",
+    "groceries",
+    "einkaufen",
+    "abholservice",
+    "germany",
+    "shopping"
+  ]
+}

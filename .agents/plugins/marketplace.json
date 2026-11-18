@@ -1,0 +1,32 @@
+{
+  "name": "german-grocery",
+  "interface": {
+    "displayName": "German groceries (REWE, EDEKA)"
+  },
+  "plugins": [
+    {
+      "name": "rewe-shopping",
+      "source": {
+        "source": "local",
+        "path": "./plugins/rewe"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Lifestyle"
+    },
+    {
+      "name": "edeka-shopping",
+      "source": {
+        "source": "local",
+        "path": "./plugins/edeka"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Lifestyle"
+    }
+  ]
+}
