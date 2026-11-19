@@ -25,7 +25,7 @@ function page(title, body) {
 <title>${title}</title><style>${css}</style></head><body><main>
 <nav><a href="/">Overview</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="${REPO}">GitHub</a></nav>
 ${body}
-<p class="muted">Last updated ${UPDATED}. Provider: Stand4 GmbH (Stardawn AI), <a href="${IMPRINT}">imprint</a>. Contact: <a href="mailto:${SUPPORT}">${SUPPORT}</a>.</p>
+<p class="muted">Last updated ${UPDATED}. Provider: Stand4 UG (haftungsbeschränkt) (Stardawn AI), <a href="${IMPRINT}">imprint</a>. Contact: <a href="mailto:${SUPPORT}">${SUPPORT}</a>.</p>
 </main></body></html>`;
 }
 
@@ -48,7 +48,7 @@ and an order only after you confirm total and slot.</p>
 <p>This policy covers the plugins <code>rewe-shopping</code> and <code>edeka-shopping</code> and the
 command-line tools they install (<code>rewe-pp-cli</code>, <code>edeka-pp-cli</code>).</p>
 <h2>Who is responsible</h2>
-<p>Stand4 GmbH (Stardawn AI), Magirus-Deutz-Straße 12, 89077 Ulm, Germany. Details in the
+<p>Stand4 UG (haftungsbeschränkt) (Stardawn AI), Magirus-Deutz-Straße 12, 89077 Ulm, Germany. Details in the
 <a href="${IMPRINT}">imprint</a>. Contact for privacy questions: <a href="mailto:${SUPPORT}">${SUPPORT}</a>.</p>
 <h2>What we collect</h2>
 <p>Nothing. The plugins and tools run entirely on your own computer. Stardawn AI operates no server
@@ -96,7 +96,7 @@ preview before you confirm.</li>
 </ul>
 <h2>No warranty</h2>
 <p>The software is provided "as is", without warranty of any kind, as stated in the Apache License
-2.0. The shops can change their websites at any time, which can break the tools. Stand4 GmbH is
+2.0. The shops can change their websites at any time, which can break the tools. Stand4 UG (haftungsbeschränkt) is
 liable only for intent and gross negligence, and under mandatory law.</p>
 <h2>Support</h2>
 <p>Questions and problems: <a href="mailto:${SUPPORT}">${SUPPORT}</a> or
