@@ -48,7 +48,7 @@ chmod +x "$dir/edeka-pp-cli.part"; mv "$dir/edeka-pp-cli.part" "$dir/edeka-pp-cl
 ```
 
 If the install folder is not on PATH, call the binary by its full path. If `checksums.txt`
-cannot be fetched, the EDEKA tool is not published yet: tell the person.
+cannot be fetched, tell the person the release is not reachable right now.
 Run the same steps again to update.
 
 ## 2. Find the market
