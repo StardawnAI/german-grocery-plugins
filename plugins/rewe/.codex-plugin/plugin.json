@@ -29,7 +29,7 @@
       "Interactive",
       "Write"
     ],
-    "websiteURL": "https://github.com/StardawnAI/german-grocery-plugins",
+    "websiteURL": "https://grocery.stardawn-service.com/",
     "defaultPrompt": [
       "Was gibt es diese Woche bei REWE im Angebot?",
       "Pack 2 Hafermilch und Bananen in meinen REWE-Warenkorb",
@@ -38,7 +38,9 @@
     "brandColor": "#CC071E",
     "composerIcon": "./assets/icon.svg",
     "logo": "./assets/icon.svg",
-    "screenshots": []
+    "screenshots": [],
+    "privacyPolicyURL": "https://grocery.stardawn-service.com/privacy",
+    "termsOfServiceURL": "https://grocery.stardawn-service.com/terms"
   },
   "extensions": {
     "com.openai": {
