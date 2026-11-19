@@ -12,15 +12,43 @@ the JSON; never show raw JSON to the person.
 
 ## 1. Make sure the CLI is there
 
-Run `rewe-pp-cli --version`. If the command is not found, install it with the script
-next to this plugin (two folders up from this skill, in `scripts/`):
+Run `rewe-pp-cli --version`. If it is not found, install the prebuilt binary from the Printing
+Press library release (moving tag `rewe-current`) and check its SHA-256 before using it. Tell the
+person in one sentence what you install and from where.
 
-- macOS / Linux: `sh <plugin>/scripts/install.sh`
-- Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File <plugin>\scripts\install.ps1`
+Windows (PowerShell):
 
-The script downloads the prebuilt binary from the Printing Press library release on
-GitHub and checks its SHA-256. If it prints that the folder is not on PATH, call the
-binary by the full path it printed. Re-run the script to update.
+```powershell
+$base = "https://github.com/mvanhorn/printing-press-library/releases/download/rewe-current"
+$arch = if ($env:PROCESSOR_ARCHITECTURE -eq "ARM64") { "arm64" } else { "amd64" }
+$asset = "rewe-pp-cli-windows-$arch.exe"
+$dir = Join-Path $env:LOCALAPPDATA "Programs\PrintingPress\bin"
+New-Item -ItemType Directory -Force $dir | Out-Null
+Invoke-WebRequest -UseBasicParsing "$base/checksums.txt" -OutFile "$dir\rewe-pp-cli.sums"
+$want = (Get-Content "$dir\rewe-pp-cli.sums" | Where-Object { ($_ -split "\s+")[1] -eq $asset } | ForEach-Object { ($_ -split "\s+")[0] })
+Remove-Item "$dir\rewe-pp-cli.sums"
+Invoke-WebRequest -UseBasicParsing "$base/$asset" -OutFile "$dir\rewe-pp-cli.exe.part"
+if ((Get-FileHash -Algorithm SHA256 "$dir\rewe-pp-cli.exe.part").Hash -ne "$want".ToUpper()) { Remove-Item "$dir\rewe-pp-cli.exe.part"; throw "checksum mismatch" }
+Move-Item -Force "$dir\rewe-pp-cli.exe.part" "$dir\rewe-pp-cli.exe"; & "$dir\rewe-pp-cli.exe" --version
+```
+
+macOS / Linux:
+
+```sh
+base="https://github.com/mvanhorn/printing-press-library/releases/download/rewe-current"
+os=$(uname -s | tr A-Z a-z); arch=$(uname -m | sed -e s/x86_64/amd64/ -e s/aarch64/arm64/)
+asset="rewe-pp-cli-$os-$arch"; dir="$HOME/.local/bin"; mkdir -p "$dir"
+want=$(curl -fsSL "$base/checksums.txt" | awk -v f="$asset" '$2==f{print $1}')
+curl -fsSL "$base/$asset" -o "$dir/rewe-pp-cli.part"
+got=$( (sha256sum "$dir/rewe-pp-cli.part" 2>/dev/null || shasum -a 256 "$dir/rewe-pp-cli.part") | cut -d' ' -f1)
+if [ -z "$want" ] || [ "$got" != "$want" ]; then rm "$dir/rewe-pp-cli.part"; echo "checksum mismatch"; exit 1; fi
+chmod +x "$dir/rewe-pp-cli.part"; mv "$dir/rewe-pp-cli.part" "$dir/rewe-pp-cli"
+[ "$os" = darwin ] && xattr -d com.apple.quarantine "$dir/rewe-pp-cli" 2>/dev/null; "$dir/rewe-pp-cli" --version
+```
+
+If the install folder is not on PATH, call the binary by its full path. If `checksums.txt`
+cannot be fetched, tell the person the release is not reachable right now.
+Run the same steps again to update.
 
 ## 2. Connect the REWE account (once, then it renews itself)
 

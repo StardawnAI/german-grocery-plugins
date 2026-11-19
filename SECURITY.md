@@ -12,11 +12,11 @@ their source lives.
 
 ## What these plugins do on your computer
 
-- The plugins contain only instructions (skills), install scripts and manifests. No
+- The plugins contain only instructions (skills), manifests and icons. No scripts, no
   background services, no hooks, no telemetry.
-- The install scripts download the CLI binary from the Printing Press library's GitHub
-  release over HTTPS and refuse to install it unless its SHA-256 matches the release's
-  `checksums.txt`.
+- The install steps in the skills download the CLI binary from the Printing Press library's
+  GitHub release over HTTPS and refuse to install it unless its SHA-256 matches the
+  release's `checksums.txt`.
 - You log in to the shop yourself in a browser window with a fresh temporary profile. The
   CLI reads the resulting cookies over a DevTools port bound to 127.0.0.1 only, stores them
   in a session file in your user profile, and deletes the temporary browser profile.

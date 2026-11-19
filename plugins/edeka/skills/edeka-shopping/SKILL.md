@@ -13,15 +13,43 @@ person's own login. Talk to the person in their language (usually German). Alway
 
 ## 1. Make sure the CLI is there
 
-Run `edeka-pp-cli --version`. If the command is not found, install it with the script
-next to this plugin (two folders up from this skill, in `scripts/`):
+Run `edeka-pp-cli --version`. If it is not found, install the prebuilt binary from the Printing
+Press library release (moving tag `edeka-current`) and check its SHA-256 before using it. Tell the
+person in one sentence what you install and from where.
 
-- macOS / Linux: `sh <plugin>/scripts/install.sh`
-- Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File <plugin>\scripts\install.ps1`
+Windows (PowerShell):
 
-The script downloads the prebuilt binary from the Printing Press library release on
-GitHub and checks its SHA-256. If it says no release exists yet, tell the person the
-EDEKA tool is not published yet. Re-run the script to update.
+```powershell
+$base = "https://github.com/mvanhorn/printing-press-library/releases/download/edeka-current"
+$arch = if ($env:PROCESSOR_ARCHITECTURE -eq "ARM64") { "arm64" } else { "amd64" }
+$asset = "edeka-pp-cli-windows-$arch.exe"
+$dir = Join-Path $env:LOCALAPPDATA "Programs\PrintingPress\bin"
+New-Item -ItemType Directory -Force $dir | Out-Null
+Invoke-WebRequest -UseBasicParsing "$base/checksums.txt" -OutFile "$dir\edeka-pp-cli.sums"
+$want = (Get-Content "$dir\edeka-pp-cli.sums" | Where-Object { ($_ -split "\s+")[1] -eq $asset } | ForEach-Object { ($_ -split "\s+")[0] })
+Remove-Item "$dir\edeka-pp-cli.sums"
+Invoke-WebRequest -UseBasicParsing "$base/$asset" -OutFile "$dir\edeka-pp-cli.exe.part"
+if ((Get-FileHash -Algorithm SHA256 "$dir\edeka-pp-cli.exe.part").Hash -ne "$want".ToUpper()) { Remove-Item "$dir\edeka-pp-cli.exe.part"; throw "checksum mismatch" }
+Move-Item -Force "$dir\edeka-pp-cli.exe.part" "$dir\edeka-pp-cli.exe"; & "$dir\edeka-pp-cli.exe" --version
+```
+
+macOS / Linux:
+
+```sh
+base="https://github.com/mvanhorn/printing-press-library/releases/download/edeka-current"
+os=$(uname -s | tr A-Z a-z); arch=$(uname -m | sed -e s/x86_64/amd64/ -e s/aarch64/arm64/)
+asset="edeka-pp-cli-$os-$arch"; dir="$HOME/.local/bin"; mkdir -p "$dir"
+want=$(curl -fsSL "$base/checksums.txt" | awk -v f="$asset" '$2==f{print $1}')
+curl -fsSL "$base/$asset" -o "$dir/edeka-pp-cli.part"
+got=$( (sha256sum "$dir/edeka-pp-cli.part" 2>/dev/null || shasum -a 256 "$dir/edeka-pp-cli.part") | cut -d' ' -f1)
+if [ -z "$want" ] || [ "$got" != "$want" ]; then rm "$dir/edeka-pp-cli.part"; echo "checksum mismatch"; exit 1; fi
+chmod +x "$dir/edeka-pp-cli.part"; mv "$dir/edeka-pp-cli.part" "$dir/edeka-pp-cli"
+[ "$os" = darwin ] && xattr -d com.apple.quarantine "$dir/edeka-pp-cli" 2>/dev/null; "$dir/edeka-pp-cli" --version
+```
+
+If the install folder is not on PATH, call the binary by its full path. If `checksums.txt`
+cannot be fetched, the EDEKA tool is not published yet: tell the person.
+Run the same steps again to update.
 
 ## 2. Find the market
 

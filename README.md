@@ -31,10 +31,10 @@ app), pick the source "German groceries (REWE, EDEKA)" and install `rewe-shoppin
 /plugin install edeka-shopping@german-grocery
 ```
 
-On first use the plugin installs the shop CLI (`rewe-pp-cli` / `edeka-pp-cli`) from the
+On first use the assistant installs the shop CLI (`rewe-pp-cli` / `edeka-pp-cli`) from the
 [Printing Press library](https://github.com/mvanhorn/printing-press-library) release for
-your system and checks its SHA-256. No Go or Node needed. You can also run the scripts
-yourself: `plugins/<shop>/scripts/install.sh` (macOS, Linux) or `install.ps1` (Windows).
+your system and checks its SHA-256 (the exact steps are in each plugin's skill). No Go or
+Node needed.
 
 ## How the login works
 

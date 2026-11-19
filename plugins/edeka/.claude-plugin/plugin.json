@@ -19,5 +19,10 @@
     "abholservice",
     "germany",
     "shopping"
-  ]
+  ],
+  "icon": "./assets/icon.png",
+  "documentationUrl": "https://github.com/StardawnAI/german-grocery-plugins/tree/main/plugins/edeka",
+  "supportUrl": "https://github.com/StardawnAI/german-grocery-plugins/issues",
+  "privacyPolicyUrl": "https://grocery.stardawn-service.com/privacy",
+  "termsOfServiceUrl": "https://grocery.stardawn-service.com/terms"
 }
