@@ -68,7 +68,6 @@ The shops have no public API. The CLIs use the shops' own websites with **your**
 
 Website, privacy policy and terms: https://grocery.stardawn-service.com
 
-
 onedone-support@stardawnai.com - made by [Stardawn AI](https://stardawnai.com).
 
 Licensed under Apache-2.0.
